@@ -20,7 +20,13 @@ if __name__ == '__main__':
 
 
 def parse_cookie(query: str) -> dict:
-    return {}
+    cookies = {}
+    info = query.split(';')
+    for el in info:
+        if '=' in el:
+            infa = el.strip().split('=', 1)
+            cookies[infa[0]] = infa[1]
+    return cookies
 
 
 if __name__ == '__main__':
@@ -28,3 +34,9 @@ if __name__ == '__main__':
     assert parse_cookie('') == {}
     assert parse_cookie('name=Dima;age=28;') == {'name': 'Dima', 'age': '28'}
     assert parse_cookie('name=Dima=User;age=28;') == {'name': 'Dima=User', 'age': '28'}
+    assert parse_cookie('name=Tom;salary=45000') == {'name': 'Tom', 'salary': '45000'}
+    assert parse_cookie('country=Ukraine;capital=Kyiv') == {'country': 'Ukraine', 'capital': 'Kyiv'}
+    assert parse_cookie('job=teacher;') == {'job': 'teacher'}
+    assert parse_cookie('product=cheese;price=17;') == {'product': 'cheese', 'price': '17'}
+    assert parse_cookie('job=python developer') == {'job': 'python developer'}
+    assert parse_cookie('job=python developer=teacher') == {'job': 'python developer=teacher'}
