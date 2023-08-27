@@ -12,6 +12,11 @@ if __name__ == '__main__':
     assert parse('http://127.0.0.1:5000/') == {}
     assert parse('http://127.0.0.1:5000/?') == {}
     assert parse('http://127.0.0.1:5000/?name=Dima') == {'name': 'Dima'}
+    assert parse('http://127.0.0.1:5000/?empty=') == {'empty': ''}
+    assert parse('http://127.0.0.1:5000/?name=Tom&work=store%20manager') == {'name': 'Tom', 'work': 'store manager'}
+    assert parse('http://127.0.0.1:5000/?age=89&') == {'age': '89'}
+    assert parse('http://127.0.0.1:5000/?password=678&password=9098') == {'password': '678'}
+    assert parse('http://127.0.0.1:5000/?work=python%20developer&salary=') == {'work': 'python developer', 'salary': ''}
 
 
 def parse_cookie(query: str) -> dict:
