@@ -20,7 +20,13 @@ if __name__ == '__main__':
 
 
 def parse_cookie(query: str) -> dict:
-    return {}
+    cookies = {}
+    info = query.split(';')
+    for el in info:
+        if '=' in el:
+            infa = el.strip().split('=', 1)
+            cookies[infa[0]] = infa[1]
+    return cookies
 
 
 if __name__ == '__main__':
